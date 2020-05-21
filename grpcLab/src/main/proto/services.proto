@@ -1,24 +1,26 @@
-syntax = "proto3";
+syntax = "proto3"; // per usare grpc serve per forza questa sintassi
 package com.classes.grpc;
 
 service Sum {
-    // compute the sum
+    // il servizio comprende le tre procedure da chiamare in remoto. la loro definizione. Una volta buildato il progetto
+    //verranno create automaticamente delle classi grpc che poi bisognerà estendere lato server per implementare queste procedure.
     rpc SimpleSum (Request) returns (Response) {}
 
     rpc RepeatedSum (RepeatedRequest) returns (stream Response) {}
 
     rpc StreamSum (stream Request) returns (stream Response) {}
 }
-// The request message containing the the numbers to be sum
+// Tdefinisco gli oggetti che mi serviranno nelle funzioni
+//nb: verranno generate delle classi pure per questi oggetti!
 message Request {
     int32 first = 1;
     int32 second = 2;
 }
-// The response message containing the sum of the two numbers
+
 message Response {
     int32 result= 1;
 }
-//The request message containing two numbers to be sum and the number of time the server must computes it.
+.
 message RepeatedRequest{
     int32 num = 1;
     int32 numberOfRepetitions = 2;
